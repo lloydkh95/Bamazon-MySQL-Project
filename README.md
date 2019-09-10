@@ -27,3 +27,4 @@ Refer to the raw SQL commands under the === First Table === comment to set up th
 Refer to the raw SQL commands under the === Second Table === comment to set up the Departments table.
 Node Package Manager (npm)
 If you clone this repo down to your machine, note that it has two npm dependencies! Before running the JavaScript files mentioned above, please run npm install in your terminal to download the prompt and mysql node packages.
+This is the link to the video of me applying the commands https://drive.google.com/file/d/1E2pdevltwYapAMtlN__jFmxAWVqTqytc/view
