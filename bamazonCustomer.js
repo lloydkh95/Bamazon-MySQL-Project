@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
     port: 3306,
 
     //Your Username
-    user: "lloydkh95",
+    user: "root",
 
     //Your password
     password: "Katya1997kh@",
@@ -37,36 +37,25 @@ connection.query('SELECT * FROM Products', function(err, res) {
     //Show user message
     console.log('Check out our selection...\n');
 
-    //Set up table header
-    console.log('  ID  |    Product Name    |   Department Name |   Price   |   In Stock');
-    console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
 
     //Loop through database and show all items
-    for(var i=0; i < res.length; i++){
-
-        //Add in padding for the table
-        var itemID = res[i].itemID + '';
-        itemID = padText("  ID  ", itemID);
-
-        var productName = res[i].productName + '';
-        productName = padText("     Product Name        ", productName);
-
-        var departmentName = res[i].departmentName + '';
-        departmentName = padText("   Department Name   ", departmentName);
-
-        var price = '$' + res[i].price.toFixed(2) + '';
-        price = padText("  Price  ", price);
-
-        var quantity = res[1].StockQuantity + ''; 
-
-        console.log(itemID + '|' + productName + '|' + departmentName + '|' + price + '|' + quantity);
-    }
-
+    
+    console.table(res);
 
     //================================================================================================
 
     //After the table is shown, ask the user to buy something
-    prompt.start();
+    inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "choice",
+        message: "What is the ID of the item you would you like to purchase? [Quit with Q]",
+        validate: function(val) {
+          return !isNaN(val) || val.toLowerCase() === "q";
+        }
+      }
+    ]).then(function(val) {
 
     //Ask for item ID
     console.log('\nWhich item would you like to buy?');
@@ -112,7 +101,7 @@ connection.query('SELECT * FROM Products', function(err, res) {
 
                            console.log('\nYour total is $' + customerTotal + '.');
 
-                        
+                         
                        }) 
                     }
                 }
